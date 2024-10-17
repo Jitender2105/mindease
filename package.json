@@ -1,12 +1,13 @@
 {
     "name": "mindease",
-"version": "1.0.0",
-"scripts": {
-  "start": "concurrently \"npm run server\" \"npm run client\"",
-  "server": "cd backend && nodemon index.js",
-  "client": "cd frontend && npm run dev"
-},
-"devDependencies": {
-  "concurrently": "^7.0.0"
-}
+    "version": "1.0.0",
+    "scripts": {
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "kill-port 5000 && cd backend && nodemon index.js",
+        "client": "kill-port 3000 && cd frontend && npm run dev"
+    },
+    "devDependencies": {
+        "concurrently": "^7.0.0",
+        "kill-port": "^2.0.1"
+    }
 }
