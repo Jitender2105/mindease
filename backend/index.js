@@ -33,20 +33,7 @@ db.connect((err) => {
   }
   console.log('Connected to MySQL');
 });
-app.post('/api/signup', async (req, res) => {
-  const { name, email, password, dob, gender } = req.body;
 
-  // Check if user already exists
-  const userExists = await new Promise((resolve, reject) => {
-      db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
-          if (err) return reject(err);
-          resolve(results.length > 0);
-      });
-  });
-
-  if (userExists) {
-      return res.status(400).json({ error: 'User already exists' });
-  }
   app.post('/api/signup', async (req, res) => {
     const { name, email, password, dob, gender } = req.body;
 
