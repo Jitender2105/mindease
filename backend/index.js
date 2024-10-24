@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Backend is working');
+  res.send('Backend is working..');
 });
 
 const PORT = process.env.PORT || 5000;
