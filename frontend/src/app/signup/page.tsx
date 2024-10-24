@@ -43,7 +43,7 @@ export default function Signup() {
 
     return (
         <div>
-            <h1>Signup</h1>
+            <h1>Signup</h1><br /><br />
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -52,7 +52,7 @@ export default function Signup() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                />
+                /><br /><br />
                 <input
                     type="email"
                     name="email"
@@ -60,7 +60,7 @@ export default function Signup() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                />
+                /><br /><br />
                 <input
                     type="password"
                     name="password"
@@ -68,20 +68,20 @@ export default function Signup() {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                />
+                /><br /><br />
                 <input
                     type="date"
                     name="dob"
                     value={formData.dob}
                     onChange={handleChange}
                     required
-                />
+                /><br /><br />
                 <select name="gender" value={formData.gender} onChange={handleChange} required>
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
-                </select>
+                </select><br /><br />
                 <button type="submit">Sign Up</button>
             </form>
         </div>
