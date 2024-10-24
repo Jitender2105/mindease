@@ -2,8 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
 
+const app = express();
 
 require('dotenv').config();
 
@@ -89,6 +89,3 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.listen(5000, () => {
-    console.log('Server running on port 5000');
-});
