@@ -38,7 +38,7 @@ export default function Login() {
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
             <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                     type="email"
                     name="email"
