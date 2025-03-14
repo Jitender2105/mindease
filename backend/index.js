@@ -35,8 +35,8 @@ db.connect((err) => {
 });
 
   app.post('/api/signup', async (req, res) => {
-    const { name, email, password, dob, gender } = req.body;
-
+    const { name, email, password, dob, gender,} = req.body;
+    const type_of_user = "student"; 
     // Check if user already exists
     const userExists = await new Promise((resolve, reject) => {
         db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
@@ -54,8 +54,8 @@ db.connect((err) => {
 
     // Insert new user
     db.query(
-        'INSERT INTO users (name, email, password, dob, gender, type_of_user) VALUES (?, ?, ?, ?, ?, student)',
-        [name, email, hashedPassword, dob, gender],
+        'INSERT INTO users (name, email, password, dob, gender, type_of_user) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, email, hashedPassword, dob, gender,type_of_user],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
             res.status(201).json({ message: 'User created successfully' });
