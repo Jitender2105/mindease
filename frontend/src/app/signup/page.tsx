@@ -27,7 +27,7 @@ export default function Signup() {
             [e.target.name]: e.target.value,
         });
     };
-
+    const finalData = { ...formData, type_of_user: "student" };
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
