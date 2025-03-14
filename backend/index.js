@@ -54,7 +54,7 @@ db.connect((err) => {
 
     // Insert new user
     db.query(
-        'INSERT INTO users (name, email, password, dob, gender) VALUES (?, ?, ?, ?, ?)',
+        'INSERT INTO users (name, email, password, dob, gender, type_of_user) VALUES (?, ?, ?, ?, ?, student)',
         [name, email, hashedPassword, dob, gender],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
