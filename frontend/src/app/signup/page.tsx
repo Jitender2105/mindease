@@ -55,7 +55,7 @@ export default function Signup() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     <input
                         type="email"
@@ -64,7 +64,7 @@ export default function Signup() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     <input
                         type="password"
@@ -73,7 +73,7 @@ export default function Signup() {
                         value={formData.password}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     <input
                         type="date"
@@ -81,14 +81,14 @@ export default function Signup() {
                         value={formData.dob}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     <select
                         name="gender"
                         value={formData.gender}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     >
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
