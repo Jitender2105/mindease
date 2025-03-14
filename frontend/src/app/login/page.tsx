@@ -1,3 +1,5 @@
+"use client";  // Add this at the top
+
 // src/app/login/page.tsx
 
 import { useState, ChangeEvent, FormEvent } from 'react';
@@ -33,9 +35,10 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+            <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
+              <form onSubmit={handleSubmit}>
                 <input
                     type="email"
                     name="email"
@@ -43,6 +46,7 @@ export default function Login() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
                 />
                 <input
                     type="password"
@@ -51,9 +55,15 @@ export default function Login() {
                     value={formData.password}
                     onChange={handleChange}
                     required
+                    className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
                 />
-                <button type="submit">Login</button>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+                    >
+                        Login
+                    </button>
             </form>
-        </div>
+        </div></div>
     );
 }

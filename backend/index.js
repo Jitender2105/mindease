@@ -58,7 +58,7 @@ db.connect((err) => {
         [name, email, hashedPassword, dob, gender,type_of_user],
         (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ message: 'User created successfully' });
+            res.redirect('/');
         }
     );
 });
