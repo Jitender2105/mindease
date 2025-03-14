@@ -46,7 +46,7 @@ export default function Signup() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-                <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Sign Up</h1>
+                <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Sign Up As Student</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="text"
