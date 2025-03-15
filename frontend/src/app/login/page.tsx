@@ -4,6 +4,7 @@
 
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 // Define form data type
 interface LoginFormData {
@@ -37,6 +38,9 @@ export default function Login() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+          <div className="flex justify-center mb-4">
+                             <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
+          </div>   
             <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
