@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface SignupFormData {
     name: string;
@@ -46,6 +47,11 @@ export default function Signup() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+                {/* Logo Section */}
+                <div className="flex justify-center mb-4">
+                    <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
+                </div>
+
                 <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Sign Up As Student</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
@@ -88,13 +94,14 @@ export default function Signup() {
                         value={formData.gender}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black custom-select"
                     >
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
+                
                     <button
                         type="submit"
                         className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
