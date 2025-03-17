@@ -21,6 +21,7 @@ export default function Signup() {
         dob: "",
         gender: "",
     });
+
     const [passwordCriteria, setPasswordCriteria] = useState({
         length: false,
         lowercase: false,
@@ -68,8 +69,13 @@ export default function Signup() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <div 
+            className="relative flex justify-center items-center min-h-screen bg-cover bg-center" 
+            style={{ backgroundImage: "url('/images/banner.jpg')" }}
+        >
+            {/* Semi-Transparent Form Container */}
+            <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg w-full max-w-md">
+                
                 {/* Logo Section */}
                 <div className="flex justify-center mb-4">
                     <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
@@ -104,6 +110,8 @@ export default function Signup() {
                         required
                         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
+
+                    {/* Password Criteria Validation */}
                     <div className="text-sm mt-1">
                         <p className={passwordCriteria.length ? "text-green-600 flex items-center" : "text-red-500"}>
                             {passwordCriteria.length && <FaCheck className="mr-1" />} At least 8 characters
@@ -121,6 +129,7 @@ export default function Signup() {
                             {passwordCriteria.specialChar && <FaCheck className="mr-1" />} At least one special character (@$!%*?&#)
                         </p>
                     </div>
+
                     <input
                         type="date"
                         name="dob"
