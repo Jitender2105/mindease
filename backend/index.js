@@ -9,6 +9,8 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.get('/', (req, res) => {
   res.send('Backend is working..');
@@ -34,34 +36,38 @@ db.connect((err) => {
   console.log('Connected to MySQL');
 });
 
-  app.post('/api/signup', async (req, res) => {
-    const { name, email, password, dob, gender,} = req.body;
-    const type_of_user = "student"; 
-    // Check if user already exists
-    const userExists = await new Promise((resolve, reject) => {
-        db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
-            if (err) return reject(err);
-            resolve(results.length > 0);
-        });
-    });
-
-    if (userExists) {
+app.post('/api/signup', async (req, res) => {
+    try {
+      const { name, email, password, dob, gender } = req.body;
+      if (!name || !email || !password || !dob || !gender) {
+        return res.status(400).json({ error: 'All fields are required' });
+      }
+  
+      const type_of_user = "student";
+  
+      // Check if user exists
+      const [existingUsers] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
+  
+      if (existingUsers.length > 0) {
         return res.status(400).json({ error: 'User already exists' });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Insert new user
-    db.query(
+      }
+  
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Insert user
+      await db.promise().query(
         'INSERT INTO users (name, email, password, dob, gender, type_of_user) VALUES (?, ?, ?, ?, ?, ?)',
-        [name, email, hashedPassword, dob, gender,type_of_user],
-        (err, result) => {
-            if (err) return res.status(500).json({ error: err.message });
-            res.redirect('/');
-        }
-    );
-});
+        [name, email, hashedPassword, dob, gender, type_of_user]
+      );
+  
+      res.json({ message: 'Signup successful!' });
+  
+    } catch (err) {
+      console.error('Signup Error:', err.message);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 // Login Route
 app.post('/api/login', (req, res) => {
