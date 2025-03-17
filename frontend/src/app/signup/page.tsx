@@ -1,8 +1,9 @@
-"use client"; // Add this to use hooks
+"use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { FaCheck } from "react-icons/fa6";
 
 interface SignupFormData {
     name: string;
@@ -20,11 +21,32 @@ export default function Signup() {
         dob: "",
         gender: "",
     });
+    const [passwordCriteria, setPasswordCriteria] = useState({
+        length: false,
+        lowercase: false,
+        uppercase: false,
+        number: false,
+        specialChar: false,
+    });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
+        });
+
+        if (e.target.name === "password") {
+            validatePassword(e.target.value);
+        }
+    };
+
+    const validatePassword = (password: string) => {
+        setPasswordCriteria({
+            length: password.length >= 8,
+            lowercase: /[a-z]/.test(password),
+            uppercase: /[A-Z]/.test(password),
+            number: /\d/.test(password),
+            specialChar: /[@$!%*?&#]/.test(password),
         });
     };
 
@@ -32,6 +54,7 @@ export default function Signup() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        if (Object.values(passwordCriteria).includes(false)) return;
         try {
             const res = await axios.post("http://localhost:5000/api/signup", finalData);
             alert(res.data.message);
@@ -81,6 +104,23 @@ export default function Signup() {
                         required
                         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                     />
+                    <div className="text-sm mt-1">
+                        <p className={passwordCriteria.length ? "text-green-600 flex items-center" : "text-red-500"}>
+                            {passwordCriteria.length && <FaCheck className="mr-1" />} At least 8 characters
+                        </p>
+                        <p className={passwordCriteria.lowercase ? "text-green-600 flex items-center" : "text-red-500"}>
+                            {passwordCriteria.lowercase && <FaCheck className="mr-1" />} At least one lowercase letter
+                        </p>
+                        <p className={passwordCriteria.uppercase ? "text-green-600 flex items-center" : "text-red-500"}>
+                            {passwordCriteria.uppercase && <FaCheck className="mr-1" />} At least one uppercase letter
+                        </p>
+                        <p className={passwordCriteria.number ? "text-green-600 flex items-center" : "text-red-500"}>
+                            {passwordCriteria.number && <FaCheck className="mr-1" />} At least one number
+                        </p>
+                        <p className={passwordCriteria.specialChar ? "text-green-600 flex items-center" : "text-red-500"}>
+                            {passwordCriteria.specialChar && <FaCheck className="mr-1" />} At least one special character (@$!%*?&#)
+                        </p>
+                    </div>
                     <input
                         type="date"
                         name="dob"
@@ -101,7 +141,7 @@ export default function Signup() {
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
-                
+                    
                     <button
                         type="submit"
                         className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
