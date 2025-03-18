@@ -7,9 +7,11 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Navbar */}
-            <nav className="bg-blue-600 p-4 text-white flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Happy Mind Spouts</h1>
-                <div className="space-x-4">
+            <nav className="bg-white-600 p-4 text-white flex justify-between items-center">
+                  <div className="flex justify-center mb-4">
+                                             <Image src="/images/logo.png" alt="Logo" width={150} height={150} />
+                          </div>   
+                <div className="space-x-4 text-gray-700">
                     <Link href="/login" className="hover:underline">Student Login</Link>
                     <Link href="/signup" className="hover:underline">Student Signup</Link>
                     <Link href="/authority/login" className="hover:underline">Authority Login</Link>
@@ -25,7 +27,7 @@ export default function Home() {
             </header>
 
             {/* Features Section */}
-            <section className="py-12 px-6">
+            <section className="py-12 px-6 text-gray-700">
                 <h3 className="text-3xl font-bold text-center mb-8">Our Features</h3>
                 <div className="grid md:grid-cols-3 gap-6">
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -44,7 +46,7 @@ export default function Home() {
             </section>
 
             {/* Clients Section */}
-            <section className="py-12 bg-gray-200 text-center">
+            <section className="py-12 bg-gray-200 text-center text-gray-700">
                 <h3 className="text-3xl font-bold mb-6">Our Clients</h3>
                 <p>Trusted by schools, parents, and mental health professionals worldwide.</p>
             </section>
