@@ -36,7 +36,10 @@ export default function Login() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+         <div 
+            className="relative flex justify-center items-center min-h-screen bg-cover bg-center" 
+            style={{ backgroundImage: "url('/images/banner.jpg')" }}
+        >
         <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
           <div className="flex justify-center mb-4">
                              <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
