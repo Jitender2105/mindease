@@ -111,6 +111,13 @@ export default function Signup() {
                         <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black" />
                         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black" />
                         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black" />
+                        <div className="text-xs text-gray-600 col-span-2 flex flex-wrap gap-x-4">
+                            {Object.entries(passwordCriteria).map(([key, valid]) => (
+                                <span key={key} className={valid ? "text-green-600 flex items-center" : "text-red-500 flex items-center"}>
+                                    {valid && <FaCheck className="mr-1" />} {key.replace(/([A-Z])/g, ' $1')}
+                                </span>
+                            ))}
+                        </div>
                         <input type="text" placeholder="Search Institute" value={searchQuery} onChange={handleInstituteSearch} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black" />
                         <select name="institute_id" value={formData.institute_id} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black">
                             <option value="">Select Institute</option>

@@ -35,39 +35,47 @@ db.connect((err) => {
   }
   console.log('Connected to MySQL');
 });
-
-app.post('/api/signup', async (req, res) => {
-    try {
-      const { name, email, password, dob, gender } = req.body;
-      if (!name || !email || !password || !dob || !gender) {
-        return res.status(400).json({ error: 'All fields are required' });
+app.get('/api/institutes', (req, res) => {
+  db.query('SELECT id, institute_name FROM institute', (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: 'Database error' });
       }
-  
+      res.json(results);
+  });
+});
+pp.post('/api/signup', async (req, res) => {
+  try {
+      const { name, email, password, dob, gender, institute_id } = req.body;
+
+      if (!name || !email || !password || !dob || !gender || !institute_id) {
+          return res.status(400).json({ error: 'All fields are required' });
+      }
+
       const type_of_user = "student";
-  
+
       // Check if user exists
       const [existingUsers] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
-  
+
       if (existingUsers.length > 0) {
-        return res.status(400).json({ error: 'User already exists' });
+          return res.status(400).json({ error: 'User already exists' });
       }
-  
+
       // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
-  
+
       // Insert user
       await db.promise().query(
-        'INSERT INTO users (name, email, password, dob, gender, type_of_user) VALUES (?, ?, ?, ?, ?, ?)',
-        [name, email, hashedPassword, dob, gender, type_of_user]
+          'INSERT INTO users (name, email, password, dob, gender, type_of_user, institute_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [name, email, hashedPassword, dob, gender, type_of_user, institute_id]
       );
-  
+
       res.json({ message: 'Signup successful!' });
-  
-    } catch (err) {
+
+  } catch (err) {
       console.error('Signup Error:', err.message);
       res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+  }
+});
 
 // Login Route
 app.post('/api/login', (req, res) => {
