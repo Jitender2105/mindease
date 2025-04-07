@@ -33,6 +33,7 @@ export default function Home() {
                         <h3 className="text-xl font-semibold mt-4 text-black">Personalized Counseling</h3>
                         <p className="text-gray-600 mt-2 text-black">One-on-one sessions with expert counselors for emotional well-being.</p>
                     </div>
+                    
                     <div className="p-6 bg-white rounded-lg shadow-md text-center text-black">
                         <Image src="/images/activities.jpg" alt="Activities" width={300} height={200} className="mx-auto" />
                         <h3 className="text-xl font-semibold mt-4 text-black">Engaging Activities</h3>
