@@ -45,7 +45,7 @@ export default function Login() {
                              <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
           </div>   
             <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={ handleSubmit} className="space-y-4">
                 <input
                     type="email"
                     name="email"
