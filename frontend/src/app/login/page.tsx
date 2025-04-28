@@ -1,4 +1,4 @@
-"use client";  // Add this at the top
+"use client";  
 
 // src/app/login/page.tsx
 
