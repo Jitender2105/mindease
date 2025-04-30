@@ -1,77 +1,84 @@
-"use client";  
-
-// src/app/login/page.tsx
+"use client";
 
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-// Define form data type
 interface LoginFormData {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export default function Login() {
-    const [formData, setFormData] = useState<LoginFormData>({
-        email: '',
-        password: '',
-        
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: '',
+    password: '',
+  });
+
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5000/api/login', formData);
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        try {
-            const res = await axios.post('http://localhost:5000/api/login', formData);
-            alert(res.data.message);
-        } catch (error: any) {
-            alert(error.response.data.error);
-        }
-    };
+      // ✅ Store user session (you can store token or user info as needed)
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-    return (
-         <div 
-            className="relative flex justify-center items-center min-h-screen bg-cover bg-center" 
-            style={{ backgroundImage: "url('/images/banner.jpg')" }}
-        >
-        <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-          <div className="flex justify-center mb-4">
-                             <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
-          </div>   
-            <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
-                />
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-                    >
-                        Login
-                    </button>
-            </form>
-        </div></div>
-    );
+      alert(res.data.message);
+
+      // ✅ Redirect to dashboard
+      router.push('/dashboard');
+    } catch (error: any) {
+      alert(error.response?.data?.error || "Login failed");
+    }
+  };
+
+  return (
+    <div 
+      className="relative flex justify-center items-center min-h-screen bg-cover bg-center" 
+      style={{ backgroundImage: "url('/images/banner.jpg')" }}
+    >
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <div className="flex justify-center mb-4">
+          <Image src="/images/logo.png" alt="Logo" width={200} height={200} />
+        </div>   
+        <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login as Student</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className='w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-black'
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }

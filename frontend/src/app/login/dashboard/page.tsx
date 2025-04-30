@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -16,7 +19,16 @@ import {
   BookOpen,
 } from "lucide-react";
 
-const Dashboard = () => {
+export default function Dashboard() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user"); // replace this with your actual auth check
+    if (!user) {
+      router.push("/login");
+    }
+  }, [router]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
       {/* Wellness Score */}
@@ -84,7 +96,11 @@ const Dashboard = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Calendar mode="single" selected={new Date()} className="rounded-md border" />
+          <Calendar
+            mode="single"
+            selected={new Date()}
+            className="rounded-md border"
+          />
         </CardContent>
       </Card>
 
@@ -128,6 +144,4 @@ const Dashboard = () => {
       </Card>
     </div>
   );
-};
-
-export default Dashboard;
+}
