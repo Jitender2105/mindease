@@ -31,7 +31,7 @@ body {
 
   /* Define custom class for border */
   .border-border {
-    border: 1px solid var(--border); /* Using the custom border color */
+    border: 0px solid var(--border); /* Using the custom border color */
   }
 }
 
