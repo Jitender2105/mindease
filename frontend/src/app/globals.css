@@ -1,4 +1,3 @@
-@import "tailwindcss";
 @import "tw-animate-css";
 
 @tailwind base;
@@ -61,7 +60,7 @@ body {
     border-color: var(--border); /* Custom border color */
     box-shadow: 0 0 0 1px var(--ring); /* Custom ring color */
   }
-  
+
   body {
     @apply bg-background text-foreground;
   }
